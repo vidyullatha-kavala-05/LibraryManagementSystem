@@ -1,0 +1,81 @@
+package lms.library.service;
+
+import lms.library.entity.*;
+import lms.library.exception.*;
+import lms.library.repository.*;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class BookService {
+
+	@Autowired
+    private BookRepository bookRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    // Retrieves all books
+    public List<Book> findAll() {
+        return bookRepository.findAll();
+    }
+    
+    // Finds a book by its ID; throws an exception if not found
+    public Book findById(Long id) {
+        Book book = bookRepository.findById(id).orElse(null);
+        if (book == null) {
+            throw new BookNotFoundException("Book not found with ID: " + id);
+        }
+        return book;
+    }
+    
+    // Saves a book's information
+    public Book save(Book book) {
+        return bookRepository.save(book);
+    }
+    
+    // Deletes a book by its ID, checking if it's available to delete
+    public void deleteById(Long id) {
+        Book book = findById(id); // Check if book exists before deleting
+        if (book.isBorrowed()) {
+            throw new BookNotAvailableException("Book is currently borrowed and cannot be deleted");
+        }
+        bookRepository.deleteById(id);
+        displayDeletionConfirmation(id);
+    }
+    
+    // Displays confirmation of deletion
+    private void displayDeletionConfirmation(Long id) {
+        System.out.println("Book with ID: " + id + " deleted successfully.");
+        
+    }
+    
+    // Borrows a book by a user, if available
+    public Book borrowBook(Long bookId, Long userId) {
+        Book book = findById(bookId);
+        User user = userRepository.findById(userId).orElse(null);
+
+        if (book != null && !book.isBorrowed() && user != null) {
+            book.setBorrowedBy(user);
+            book.setBorrowed(true);
+            return save(book);
+        }
+        
+        return null;
+    }
+
+    // Returns a borrowed book
+    public Book returnBook(Long bookId) {
+        Book book = findById(bookId);
+        if (book != null && book.isBorrowed()) {
+            book.setBorrowedBy(null);
+            book.setBorrowed(false);
+            return save(book);
+        }
+        
+        return null;
+    }
+}
