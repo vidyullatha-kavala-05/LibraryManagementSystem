@@ -1,0 +1,10 @@
+create database library_management_system;
+use library_management_system;
+
+select * from user;
+
+select * from book;
+
+select * from librarian;
+
+select * from admin;
