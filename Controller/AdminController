@@ -25,12 +25,23 @@ public class AdminController {
     public Admin getAdmin(@PathVariable Long adminId) {
         return adminService.findById(adminId);
     }
+   
+ 
     
-    @PutMapping("/{adminId}")
-    public Admin updateAdmin(@PathVariable Long adminId, @RequestBody Admin admin) {
-        return adminService.save(admin);
-    }
+    //update admin
+  	@PutMapping("/{adminId}")
+  	public ResponseEntity<Admin> updateAdmin(@PathVariable Long adminId, @RequestBody Admin updatedAdmin) {
 
+		 	Admin updated = adminService.updateAdmin(adminId, updatedAdmin);
+
+	        if (updated != null) {
+	            return ResponseEntity.ok(updated);
+	        } else {
+	            return ResponseEntity.notFound().build(); 
+	        }
+	    }
+    
+    
     @DeleteMapping("/{adminId}")
     public void deleteAdmin(@PathVariable Long adminId) {
         adminService.deleteById(adminId);
@@ -66,3 +77,4 @@ public class AdminController {
     }
     
 }
+
