@@ -44,14 +44,31 @@ public class UserController {
 	         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
 	     }
 	 }
-	    
+	  /*  
 	 // Updates user information
 	 @PutMapping("/{userId}")
 	 public User updateUser(@PathVariable Long userId, @RequestBody User user) {
 	        
 	     return userService.save(user);
 	 }
-	    
+	   */
+	// Updates user information
+	@PutMapping("/{userId}")
+    public ResponseEntity<User> updateUserById(
+            @PathVariable Long userId,
+            @RequestBody User updatedUser) {
+
+        User updated = userService.updateUserById(userId, updatedUser);
+
+        if (updated != null) {
+            return ResponseEntity.ok(updated);
+        } else {
+            // Handle scenario if user with the given ID is not found
+            return ResponseEntity.notFound().build();
+        }
+    }
+	
+	
 	    
 	// Deletes a user by ID
 	@DeleteMapping("/{userId}")
@@ -60,13 +77,8 @@ public class UserController {
 	    	
 	    String message = "User with ID: " + userId + " deleted successfully.";
 	    return ResponseEntity.ok(message);
-	}
-	    
-	    
-	   
+	}	   
 
 
 }
-
-
 
