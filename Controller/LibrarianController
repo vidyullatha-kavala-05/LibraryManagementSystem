@@ -41,15 +41,22 @@ public class LibrarianController {
 	                 .body("Librarian not found with ID: " + librarianId);
 	     }
 	 }
-	    
-	    
-	 // Updates librarian information
+	
+	 
+	//update librarian
 	 @PutMapping("/{librarianId}")
-	 public Librarian updateLibrarian(@PathVariable Long librarianId, @RequestBody Librarian librarian) {
-	        
-	     return librarianService.save(librarian);
-	 }
-	    
+	    public ResponseEntity<Librarian> updateLibrarian(@PathVariable Long librarianId, @RequestBody Librarian updatedLibrarian) {
+
+	        Librarian updated = librarianService.updateLibrarian(librarianId, updatedLibrarian);
+
+	        if (updated != null) {
+	            return ResponseEntity.ok(updated);
+	        } else {
+	            return ResponseEntity.notFound().build(); 
+	        }
+	    }
+	
+	 
 	 // Deletes a librarian by ID
 	 @DeleteMapping("/{librarianId}")
 	 public ResponseEntity<String> deleteLibrarian(@PathVariable Long librarianId) {
@@ -59,7 +66,7 @@ public class LibrarianController {
 	     return ResponseEntity.ok(message);
 	 }
 	    
-	    
+	 
 	// Registers a new librarian
 	 @PostMapping("/register")
 	 public ResponseEntity<?> registerLibrarian(@RequestBody Librarian librarian) {
@@ -96,7 +103,6 @@ public class LibrarianController {
 
 
 }
-
 
 
 
