@@ -36,6 +36,26 @@ public class LibrarianService {
         }
     }
     
+    //update a librarian
+    public Librarian updateLibrarian(Long id, Librarian updatedLibrarian) {
+        Optional<Librarian> existingLibrarianOptional = librarianRepository.findById(id);
+
+        if (existingLibrarianOptional.isPresent()) {
+            Librarian existingLibrarian = existingLibrarianOptional.get();
+            
+            // Update the existing librarian details with the new information
+            existingLibrarian.setLibrarianEmail(updatedLibrarian.getLibrarianEmail());
+            existingLibrarian.setLibrarianPassword(updatedLibrarian.getLibrarianPassword());
+            existingLibrarian.setLibrarianName(updatedLibrarian.getLibrarianName());
+            existingLibrarian.setLibrarianPhone(updatedLibrarian.getLibrarianPhone());
+            existingLibrarian.setLibrarianAddress(updatedLibrarian.getLibrarianAddress());
+
+            return librarianRepository.save(existingLibrarian);
+        } else {
+            return null;
+        }
+    }
+    
     // Deletes a librarian by ID, after confirming its existence
     public void deleteById(Long id) {
     	Librarian  librarian= findById(id); // Check if user exists before deleting
