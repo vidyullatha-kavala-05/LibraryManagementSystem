@@ -7,7 +7,7 @@ import lms.library.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -32,6 +32,25 @@ public class UserService {
             throw new UserNotFoundException("User not found with ID: " + id);
         }
         return user;
+    }
+    
+    //update user by ID
+    public User updateUserById(Long userId, User updatedUser) {
+        Optional<User> existingUserOptional = userRepository.findById(userId);
+
+        if (existingUserOptional.isPresent()) {
+            User existingUser = existingUserOptional.get();
+            // Update user fields with the new information
+            existingUser.setUserName(updatedUser.getUserName());
+            existingUser.setUserEmail(updatedUser.getUserEmail());
+            existingUser.setUserPhone(updatedUser.getUserPhone());
+            existingUser.setUserAddress(updatedUser.getUserAddress());
+
+            return userRepository.save(existingUser);
+        } else {
+            
+            return null;
+        }
     }
     
     // Deletes a user by ID, after confirming its existence
