@@ -42,7 +42,7 @@ public class BookController {
     public Book addBook(@RequestBody Book book) {
         return bookService.save(book);
     }
- 
+
   //update book
   	 @PutMapping("/{bookId}")
   	    public ResponseEntity<Book> updateBook(@PathVariable Long bookId, @RequestBody Book updatedBook) {
@@ -95,5 +95,6 @@ public class BookController {
     }
 
     
-    
 }
+
+
