@@ -41,86 +41,56 @@ public class Librarian {
 		this.librarianAddress = librarianAddress;
 	}
 
-	/**
-	 * @return the id
-	 */
+	
 	public Long getId() {
 		return id;
 	}
 
-	/**
-	 * @param id the id to set
-	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return the librarianEmail
-	 */
+	
 	public String getLibrarianEmail() {
 		return librarianEmail;
 	}
 
-	/**
-	 * @param librarianEmail the librarianEmail to set
-	 */
 	public void setLibrarianEmail(String librarianEmail) {
 		this.librarianEmail = librarianEmail;
 	}
 
-	/**
-	 * @return the librarianPassword
-	 */
+	
 	public String getLibrarianPassword() {
 		return librarianPassword;
 	}
 
-	/**
-	 * @param librarianPassword the librarianPassword to set
-	 */
 	public void setLibrarianPassword(String librarianPassword) {
 		this.librarianPassword = librarianPassword;
 	}
 
-	/**
-	 * @return the librarianName
-	 */
+	
 	public String getLibrarianName() {
 		return librarianName;
 	}
 
-	/**
-	 * @param librarianName the librarianName to set
-	 */
 	public void setLibrarianName(String librarianName) {
 		this.librarianName = librarianName;
 	}
 
-	/**
-	 * @return the librarianPhone
-	 */
+	
 	public String getLibrarianPhone() {
 		return librarianPhone;
 	}
 
-	/**
-	 * @param librarianPhone the librarianPhone to set
-	 */
 	public void setLibrarianPhone(String librarianPhone) {
 		this.librarianPhone = librarianPhone;
 	}
-
-	/**
-	 * @return the librarianAddress
-	 */
+	
+	
 	public String getLibrarianAddress() {
 		return librarianAddress;
 	}
 
-	/**
-	 * @param librarianAddress the librarianAddress to set
-	 */
 	public void setLibrarianAddress(String librarianAddress) {
 		this.librarianAddress = librarianAddress;
 	}
@@ -135,3 +105,6 @@ public class Librarian {
 	
 	
 }
+
+
+
