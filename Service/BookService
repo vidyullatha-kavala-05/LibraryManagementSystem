@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Service
 public class BookService {
@@ -83,22 +85,65 @@ public class BookService {
         if (book != null && !book.isBorrowed() && user != null) {
             book.setBorrowedBy(user);
             book.setBorrowed(true);
+            book.setBorrowedDate(new Date());
             return save(book);
         }
         
         return null;
     }
-
-    // Returns a borrowed book
+    
+    
     public Book returnBook(Long bookId) {
         Book book = findById(bookId);
         if (book != null && book.isBorrowed()) {
             book.setBorrowedBy(null);
             book.setBorrowed(false);
+
+            Date borrowedDate = book.getBorrowedDate();
+            Date returnDate = new Date(); // Assuming return date as the current date
+
+            BigDecimal fine = calculateFine(book, borrowedDate, returnDate);
+            if (fine.compareTo(BigDecimal.ZERO) > 0) {
+                System.out.println("Fine imposed: " + fine + " rupees.");
+                // Handle the fine logic here, such as updating user balance or payment records
+                // You may want to link this fine with a user's record or payment system
+            } else {
+                System.out.println("No fine incurred. Book returned successfully.");
+            }
+
             return save(book);
         }
-        
         return null;
     }
+
+    private BigDecimal calculateFine(Book book, Date borrowedDate, Date returnDate) {
+        // Existing fine calculation logic
+
+        if (returnDate.after(borrowedDate)) {
+            BigDecimal fine = BigDecimal.valueOf(0);
+
+            long borrowedTimeInMillis = borrowedDate.getTime();
+            long returnTimeInMillis = returnDate.getTime();
+            long differenceInMillis = returnTimeInMillis - borrowedTimeInMillis;
+
+            long daysDifference = differenceInMillis / (1000 * 60 * 60 * 24); // Convert milliseconds to days
+
+            if (daysDifference > 30) {
+                long extraDays = daysDifference - 30; // Calculate extra days beyond the first month
+                long monthsLate = extraDays / 30; // Calculate months late
+                fine = BigDecimal.valueOf(monthsLate * 20); // 20 rupees fine per month late
+            }
+
+            // Add bookPrice to the fine if the book is not returned
+            if (returnDate.after(borrowedDate)) {
+                fine = fine.add(book.getBookPrice());
+            }
+
+            return fine;
+        }
+
+        return BigDecimal.ZERO;
+    }
+    
 }
 
