@@ -34,7 +34,6 @@ public class Admin {
 	public Admin(String adminPassword, String adminEmail, String adminName, String adminPhone,
 			String adminAddress) {
 		super();
-		//this.adminId = adminId;
 		this.adminPassword = adminPassword;
 		this.adminEmail = adminEmail;
 		this.adminName = adminName;
@@ -42,86 +41,55 @@ public class Admin {
 		this.adminAddress = adminAddress;
 	}
 
-	/**
-	 * @return the adminId
-	 */
 	public Long getAdminId() {
 		return adminId;
 	}
 
-	/**
-	 * @param adminId the adminId to set
-	 */
 	public void setAdminId(Long adminId) {
 		this.adminId = adminId;
 	}
 
-	/**
-	 * @return the adminPassword
-	 */
+	
 	public String getAdminPassword() {
 		return adminPassword;
 	}
 
-	/**
-	 * @param adminPassword the adminPassword to set
-	 */
 	public void setAdminPassword(String adminPassword) {
 		this.adminPassword = adminPassword;
 	}
 
-	/**
-	 * @return the adminEmail
-	 */
+	
 	public String getAdminEmail() {
 		return adminEmail;
 	}
 
-	/**
-	 * @param adminEmail the adminEmail to set
-	 */
 	public void setAdminEmail(String adminEmail) {
 		this.adminEmail = adminEmail;
 	}
 
-	/**
-	 * @return the adminName
-	 */
+	
 	public String getAdminName() {
 		return adminName;
 	}
 
-	/**
-	 * @param adminName the adminName to set
-	 */
 	public void setAdminName(String adminName) {
 		this.adminName = adminName;
 	}
 	
-	/**
-	 * @return the adminPhone
-	 */
+	
 	public String getAdminPhone() {
 		return adminPhone;
 	}
 
-	/**
-	 * @param adminPhone the adminPhone to set
-	 */
 	public void setAdminPhone(String adminPhone) {
 		this.adminPhone = adminPhone;
 	}
 
-	/**
-	 * @return the adminAddress
-	 */
+	
 	public String getAdminAddress() {
 		return adminAddress;
 	}
 
-	/**
-	 * @param adminAddress the adminAddress to set
-	 */
 	public void setAdminAddress(String adminAddress) {
 		this.adminAddress = adminAddress;
 	}
@@ -134,3 +102,4 @@ public class Admin {
 	
 		
 }
+
