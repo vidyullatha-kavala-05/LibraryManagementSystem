@@ -9,9 +9,10 @@ import lms.library.entity.*;
 public interface BookRepository extends JpaRepository<Book, Long>{
 	
 	// Finds a librarian by their ID wrapped in an Optional
-	Optional<Book> findById(Long id);
+		Optional<Book> findById(Long id);
 
 	
 }
+
 
 
