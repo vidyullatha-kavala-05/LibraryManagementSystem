@@ -44,14 +44,8 @@ public class UserController {
 	         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found with ID: " + userId);
 	     }
 	 }
-	  /*  
-	 // Updates user information
-	 @PutMapping("/{userId}")
-	 public User updateUser(@PathVariable Long userId, @RequestBody User user) {
-	        
-	     return userService.save(user);
-	 }
-	   */
+	 
+	
 	// Updates user information
 	@PutMapping("/{userId}")
     public ResponseEntity<User> updateUserById(
@@ -77,8 +71,14 @@ public class UserController {
 	    	
 	    String message = "User with ID: " + userId + " deleted successfully.";
 	    return ResponseEntity.ok(message);
-	}	   
+	}
+	    
+	    
+	   
 
 
 }
+
+
+
 
